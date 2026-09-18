@@ -9,13 +9,13 @@ This document describes the architectural design, data pipeline, decision bounda
 A core failure mode in naive agentic implementations is delegating exact business rules, timeline calculations, and deduplication logic entirely to an LLM. In an executive context, nondeterministic errors in deadlines, status, or task ownership destroy user trust.
 
 To solve this, our system implements a **strictly layered hybrid pipeline**:
-- **Semantic Understanding Layer (Gemini 3.8 Flash via `@google/genai`)**: Used where semantic parsing, natural language intent understanding, and grounded conversational Q&A are required.
+- **Semantic Understanding Layer (LangChain + Gemini 3.8 Flash)**: Used where semantic parsing, natural language intent understanding, and grounded conversational Q&A are required. Orchestrated via `@langchain/google` (`ChatGoogle`) and `@langchain/core` runnables (`ChatPromptTemplate`, `JsonOutputParser`).
 - **Deterministic Business Logic Layer (JavaScript Services)**: Used where exact business rules, timeline math, canonical action deduplication, historical status transitions, and ownership enforcement are required.
 
 ```
 MESSY BUSINESS INPUT (Emails, Meetings, Voice Notes, Calendar)
                       ↓
-         Semantic Extraction (Gemini 3.8 Flash / Baseline)
+         LangChain Semantic Extraction (ChatGoogle / Baseline)
                       ↓
          Deterministic Entity Normalization (normalize.js)
                       ↓
@@ -29,10 +29,10 @@ MESSY BUSINESS INPUT (Emails, Meetings, Voice Notes, Calendar)
                       ↓
          Simulated Time Engine ("Viewing as of" Selector)
           ↙                                              ↘
-Executive Daily Brief API                             Grounded Q&A API
-(backend/services/brief.js)                         (backend/services/qa.js)
+Executive Daily Brief API                    LangChain Grounded Q&A API
+(backend/services/brief.js)                  (backend/services/qa.js)
           ↓                                              ↓
-Executive Dashboard (React)                        Ask Agent Interface (React)
+Executive Dashboard (React)                  Ask Agent Interface (React)
 ```
 
 ---
@@ -45,9 +45,9 @@ flowchart TD
         PDF[Assignment 1 Data Pack PDF] --> RAW_JSON[backend/data/raw/dataPack.json]
     end
 
-    subgraph Extraction Pipeline
+    subgraph LangChain Extraction Pipeline
         RAW_JSON --> EXT[Semantic Extractor<br/>services/extract.js]
-        LLM[Google GenAI SDK<br/>Gemini 3.8 Flash] -.->|Semantic Parsing| EXT
+        LLM[LangChain ChatGoogle<br/>Gemini 3.8 Flash] -.->|PromptTemplate & OutputParser| EXT
         EXT --> CAND[Candidate Actions]
     end
 

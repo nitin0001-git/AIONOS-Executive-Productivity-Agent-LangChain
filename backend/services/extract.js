@@ -7,7 +7,9 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { isGeminiConfigured, generateJson } from './llm.js';
+import { isGeminiConfigured, getChatModel, getModelName } from './llm.js';
+import { ChatPromptTemplate } from '@langchain/core/prompts';
+import { JsonOutputParser } from '@langchain/core/output_parsers';
 import { normalizeAction } from './normalize.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -576,57 +578,74 @@ export async function extractActions() {
   }
 
   try {
-    console.log('[Extract Service] Performing semantic extraction with Gemini 3.8 Flash...');
-    const prompt = `You are an executive assistant for Arjun Malhotra (VP Sales at Veridian Corp).
-Extract actionable commitments, tasks, and deadlines from this historical exercise data (week of 21–25 September 2026).
+    console.log(`[Extract Service] Performing semantic extraction via LangChain (${getModelName()})...`);
+    const model = getChatModel();
+    if (!model) {
+      return baseline;
+    }
 
-RAW DATA SUMMARY:
-${JSON.stringify({
-  meetings: dataPack.meetings,
-  emailThreads: dataPack.emailThreads,
-  voiceNotes: dataPack.voiceNotes
-}, null, 2)}
+    const systemPrompt = `You are an executive assistant for Arjun Malhotra (VP Sales at Veridian Corp).
+Extract actionable commitments, tasks, and deadlines from this historical exercise data (week of 21–25 September 2026).
 
 REQUIREMENTS:
 1. Extract canonical actions/commitments.
 2. For the Mumbai office lease: keep ownership strictly "Unclear" (do NOT assume Facilities or Arjun).
 3. Consolidate email threads into single canonical commitments with latest confirmed deadlines.
-4. Return an array of objects matching:
-   [
-     {
-       "id": "action-...",
-       "title": "...",
-       "description": "...",
-       "category": "...",
-       "owner": "...",
-       "recipient": "...",
-       "deadline": "YYYY-MM-DDTHH:MM:SS",
-       "deadlineLabel": "...",
-       "priority": "urgent|high|medium|low",
-       "waitingOn": "... or null",
-       "relatedPeople": ["..."],
-       "evidence": [
-         {
-           "sourceType": "email|meeting|voice_note|calendar",
-           "sourceId": "...",
-           "timestamp": "YYYY-MM-DDTHH:MM:SS",
-           "displayTime": "...",
-           "from": "...",
-           "to": "...",
-           "evidence": "exact quote",
-           "note": "..."
-         }
-       ]
-     }
-   ]`;
+4. Return an array of objects matching the required schema.`;
 
-    const result = await generateJson(prompt);
+    const humanPrompt = `RAW DATA SUMMARY:
+{rawDataSummary}
+
+Return an array of objects matching:
+[
+  {{
+    "id": "action-...",
+    "title": "...",
+    "description": "...",
+    "category": "...",
+    "owner": "...",
+    "recipient": "...",
+    "deadline": "YYYY-MM-DDTHH:MM:SS",
+    "deadlineLabel": "...",
+    "priority": "urgent|high|medium|low",
+    "waitingOn": "... or null",
+    "relatedPeople": ["..."],
+    "evidence": [
+      {{
+        "sourceType": "email|meeting|voice_note|calendar",
+        "sourceId": "...",
+        "timestamp": "YYYY-MM-DDTHH:MM:SS",
+        "displayTime": "...",
+        "from": "...",
+        "to": "...",
+        "evidence": "exact quote",
+        "note": "..."
+      }}
+    ]
+  }}
+]`;
+
+    const promptTemplate = ChatPromptTemplate.fromMessages([
+      ['system', systemPrompt],
+      ['human', humanPrompt]
+    ]);
+
+    const parser = new JsonOutputParser();
+    const chain = promptTemplate.pipe(model).pipe(parser);
+
+    const rawDataSummary = JSON.stringify({
+      meetings: dataPack.meetings,
+      emailThreads: dataPack.emailThreads,
+      voiceNotes: dataPack.voiceNotes
+    }, null, 2);
+
+    const result = await chain.invoke({ rawDataSummary });
     if (Array.isArray(result) && result.length >= 4) {
-      console.log(`[Extract Service] Gemini successfully extracted ${result.length} canonical actions.`);
+      console.log(`[Extract Service] LangChain successfully extracted ${result.length} canonical actions.`);
       return result.map(normalizeAction);
     }
   } catch (err) {
-    console.warn('[Extract Service] Gemini extraction encountered an issue, falling back to deterministic baseline:', err.message);
+    console.warn('[Extract Service] LangChain extraction encountered an issue, falling back to deterministic baseline:', err.message);
   }
 
   return baseline;

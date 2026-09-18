@@ -28,22 +28,22 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
   };
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl mb-6">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs mb-6">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         {/* Title and Explanation */}
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
-            <Clock className="w-5 h-5" />
+          <div className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-600">
+            <Clock className="w-4 h-4 text-indigo-600" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">Simulated Timeline</span>
-              <span className="text-slate-500">•</span>
-              <span className="text-xs text-slate-400">Historical Exercise Week (Sep 21–25, 2026)</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">Simulated Timeline</span>
+              <span className="text-slate-300">•</span>
+              <span className="text-[11px] text-slate-500">Historical Exercise Week (Sep 21–25, 2026)</span>
             </div>
-            <div className="text-sm font-semibold text-white flex items-center gap-2 mt-0.5">
+            <div className="text-sm font-semibold text-slate-900 flex items-center gap-2 mt-0.5">
               <span>Viewing as of:</span>
-              <span className="text-indigo-300 bg-indigo-950/60 px-2.5 py-0.5 rounded-md border border-indigo-500/30">
+              <span className="text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-md border border-indigo-200/70 font-bold">
                 {timepoints.find(t => t.iso === currentAsOf)?.label || currentAsOf}
               </span>
             </div>
@@ -51,12 +51,12 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
         </div>
 
         {/* Quick Stepper Controls & Dropdown */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={handlePrev}
             disabled={currentIndex <= 0}
             title="Step Back in Time"
-            className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-750 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            className="p-1.5 rounded-md bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
@@ -66,10 +66,10 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
               id="time-selector-dropdown"
               value={currentAsOf}
               onChange={e => onSelectTime(e.target.value)}
-              className="appearance-none bg-slate-800/90 border border-slate-700 text-slate-100 text-xs font-medium rounded-lg px-3.5 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer shadow-inner"
+              className="appearance-none bg-white border border-slate-200 text-slate-800 text-xs font-medium rounded-md pl-3 pr-8 py-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer shadow-2xs"
             >
               {timepoints.map(tp => (
-                <option key={tp.id} value={tp.iso} className="bg-slate-800 text-slate-100">
+                <option key={tp.id} value={tp.iso}>
                   {tp.label}
                 </option>
               ))}
@@ -81,7 +81,7 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
             onClick={handleNext}
             disabled={currentIndex >= timepoints.length - 1}
             title="Step Forward in Time"
-            className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-750 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+            className="p-1.5 rounded-md bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -89,17 +89,17 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
       </div>
 
       {/* Horizontal Pills for Quick Jumps */}
-      <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
+      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto pb-1">
         {timepoints.map(tp => {
           const isSelected = tp.iso === currentAsOf;
           return (
             <button
               key={tp.id}
               onClick={() => onSelectTime(tp.iso)}
-              className={`whitespace-nowrap px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+              className={`whitespace-nowrap px-2.5 py-1 rounded-md text-xs transition-colors cursor-pointer ${
                 isSelected
-                  ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/50 ring-1 ring-indigo-400/50'
-                  : 'bg-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  ? 'bg-indigo-600 text-white font-medium shadow-2xs'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
               }`}
             >
               {tp.label.replace(' — ', ' ')}
@@ -110,3 +110,5 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
     </div>
   );
 };
+
+export default TimeSelector;

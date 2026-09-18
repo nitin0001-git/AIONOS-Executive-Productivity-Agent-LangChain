@@ -56,15 +56,15 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
 
   return (
     <div className="space-y-6">
-      {/* Title & Introduction */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-slate-900 to-violet-950/40 border border-indigo-500/20 shadow-xl">
+      {/* Title & Query Box */}
+      <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+          <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white tracking-tight">Ask the Executive Productivity Agent</h2>
-            <p className="text-xs text-slate-400">
+            <h2 className="text-base font-bold text-slate-900 tracking-tight">Ask Executive Productivity Agent</h2>
+            <p className="text-xs text-slate-500">
               Grounded executive Q&A for Arjun Malhotra • Evaluated strictly as of the simulated historical time
             </p>
           </div>
@@ -79,14 +79,14 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
               value={question}
               onChange={e => setQuestion(e.target.value)}
               placeholder="Ask anything about Arjun's commitments, deadlines, or deliverables..."
-              className="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-inner"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 shadow-2xs transition-colors"
             />
           </div>
           <button
             type="submit"
             id="qa-submit-button"
             disabled={loading || !question.trim()}
-            className="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition-all cursor-pointer"
+            className="px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium text-sm flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
             <span>Ask</span>
@@ -94,9 +94,9 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
         </form>
 
         {/* Suggested Chips */}
-        <div className="mt-4 pt-3 border-t border-slate-800/80">
-          <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
-            Suggested Executive Prompts:
+        <div className="mt-4 pt-3 border-t border-slate-100">
+          <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
+            Suggested Prompts:
           </div>
           <div className="flex flex-wrap gap-1.5">
             {suggestedQuestions.map((item, idx) => (
@@ -107,7 +107,7 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
                   setQuestion(item.q);
                   handleAsk(item.q);
                 }}
-                className="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-indigo-950/60 hover:text-indigo-200 border border-slate-700/70 hover:border-indigo-500/40 text-slate-300 transition-all cursor-pointer"
+                className="text-xs px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 hover:text-slate-900 text-slate-700 border border-slate-200/80 transition-colors cursor-pointer"
               >
                 {item.q}
               </button>
@@ -118,10 +118,10 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
 
       {/* Loading state */}
       {loading && (
-        <div className="p-8 rounded-2xl bg-slate-900/80 border border-slate-800 text-center space-y-3 shadow-xl">
-          <Loader2 className="w-7 h-7 text-indigo-400 animate-spin mx-auto" />
-          <div className="text-sm font-semibold text-white">Synthesizing Grounded Answer...</div>
-          <p className="text-xs text-slate-400 max-w-md mx-auto">
+        <div className="p-8 rounded-xl bg-white border border-slate-200 text-center space-y-2.5 shadow-xs">
+          <Loader2 className="w-6 h-6 text-indigo-600 animate-spin mx-auto" />
+          <div className="text-sm font-semibold text-slate-900">Synthesizing Grounded Answer via LangChain...</div>
+          <p className="text-xs text-slate-500 max-w-md mx-auto">
             Cross-referencing Leadership Sync, email threads, calendar events, and voice notes as of {currentAsOf}
           </p>
         </div>
@@ -129,30 +129,30 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
 
       {/* Error state */}
       {error && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs">
+        <div className="p-4 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs">
           {error}
         </div>
       )}
 
       {/* Answer Presentation */}
       {response && (
-        <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl space-y-5 animate-in fade-in duration-300">
+        <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-xs space-y-4">
           {/* Header */}
-          <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
                 Agent Response
               </span>
-              <h3 className="text-base font-bold text-white mt-1">"{response.question}"</h3>
+              <h3 className="text-base font-bold text-slate-900 mt-1">"{response.question}"</h3>
             </div>
             <div className="flex items-center gap-2">
               {response.status && (
-                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-indigo-300 uppercase">
+                <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 uppercase">
                   Status: {response.status}
                 </span>
               )}
               {response.deadline && (
-                <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 flex items-center gap-1">
+                <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-700 flex items-center gap-1">
                   <Clock className="w-3 h-3 text-slate-400" />
                   <span>{response.deadline}</span>
                 </span>
@@ -161,21 +161,21 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
           </div>
 
           {/* Executive Summary */}
-          <div className="p-4 rounded-xl bg-indigo-950/20 border border-indigo-500/20 text-sm text-slate-200 leading-relaxed font-medium">
+          <div className="p-4 rounded-lg bg-indigo-50/60 border border-indigo-100 text-sm text-slate-800 leading-relaxed font-medium">
             {response.summary}
           </div>
 
           {/* Key Takeaways */}
           {response.keyPoints && response.keyPoints.length > 0 && (
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5 flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>Key Executive Takeaways</span>
               </h4>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5">
                 {response.keyPoints.map((pt, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs text-slate-300 leading-relaxed">
-                    <span className="text-indigo-400 mt-0.5 font-bold">•</span>
+                  <li key={idx} className="flex items-start gap-2 text-xs text-slate-700 leading-relaxed">
+                    <span className="text-indigo-600 font-bold">•</span>
                     <span>{pt}</span>
                   </li>
                 ))}
@@ -185,32 +185,32 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
 
           {/* Evidence Citations */}
           {response.citations && response.citations.length > 0 && (
-            <div className="pt-4 border-t border-slate-800">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <div className="pt-3 border-t border-slate-100">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>Direct Data Pack Citations ({response.citations.length})</span>
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {response.citations.map((cite, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-slate-850 border border-slate-750 text-xs space-y-1.5">
-                    <div className="flex items-center justify-between text-[11px] text-slate-400">
-                      <span className="font-semibold text-indigo-300 capitalize">{cite.sourceType.replace('_', ' ')}</span>
+                  <div key={idx} className="p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs space-y-1.5">
+                    <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span className="font-semibold text-slate-800 capitalize">{cite.sourceType.replace('_', ' ')}</span>
                       <span>{cite.displayTime}</span>
                     </div>
-                    <div className="text-[11px] text-slate-400 flex items-center gap-1">
-                      <span className="font-medium text-slate-300">{cite.from}</span>
+                    <div className="text-[11px] text-slate-500 flex items-center gap-1">
+                      <span className="font-medium text-slate-700">{cite.from}</span>
                       {cite.to && (
                         <>
-                          <ArrowRight className="w-2.5 h-2.5 text-slate-600" />
+                          <ArrowRight className="w-2.5 h-2.5 text-slate-400" />
                           <span>{cite.to}</span>
                         </>
                       )}
                     </div>
-                    <div className="p-2 rounded bg-slate-950/80 border border-slate-800 font-mono text-[11px] text-slate-300 italic">
+                    <div className="p-2 rounded bg-white border border-slate-200 font-mono text-[11px] text-slate-700 italic">
                       "{cite.evidence}"
                     </div>
                     {cite.note && (
-                      <div className="text-[10px] text-indigo-400">Note: {cite.note}</div>
+                      <div className="text-[10px] text-indigo-700">Note: {cite.note}</div>
                     )}
                   </div>
                 ))}
@@ -222,3 +222,5 @@ export const AskAgent: React.FC<AskAgentProps> = ({ currentAsOf }) => {
     </div>
   );
 };
+
+export default AskAgent;

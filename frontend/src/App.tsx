@@ -82,7 +82,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
       {/* Top Header */}
       <Header
         health={health}
@@ -104,17 +104,17 @@ export const App: React.FC = () => {
 
         {/* Global Loading Spinner */}
         {loading && !brief ? (
-          <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
-            <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
-            <p className="text-sm font-semibold text-slate-300">Evaluating Historical State as of {asOf}...</p>
+          <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-3">
+            <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
+            <p className="text-xs font-semibold text-slate-600">Evaluating Historical State as of {asOf}...</p>
           </div>
         ) : error ? (
-          <div className="p-6 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-center space-y-3">
-            <p className="font-bold text-base">Backend Connection Error</p>
-            <p className="text-xs">{error}</p>
+          <div className="p-6 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-center space-y-3">
+            <p className="font-bold text-sm">Backend Connection Error</p>
+            <p className="text-xs text-rose-600">{error}</p>
             <button
               onClick={() => setAsOf('2026-09-23T09:00:00')}
-              className="px-4 py-2 rounded-lg bg-rose-600 text-white text-xs font-semibold hover:bg-rose-500 cursor-pointer"
+              className="px-4 py-2 rounded-lg bg-rose-600 text-white text-xs font-medium hover:bg-rose-700 cursor-pointer transition-colors"
             >
               Reset to Default Time
             </button>
@@ -145,23 +145,23 @@ export const App: React.FC = () => {
       />
 
       {/* Footer */}
-      <footer className="mt-12 border-t border-slate-900 bg-slate-950 py-6 text-xs text-slate-500">
+      <footer className="mt-12 border-t border-slate-200 bg-white py-5 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>AIONOS Executive Productivity Agent Prototype • Built for Arjun Malhotra (VP Sales)</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <span className="font-medium">AIONOS Executive Productivity Agent • Built for Arjun Malhotra (VP Sales)</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-4 text-slate-500">
             <button
               onClick={handleRebuildPipeline}
               disabled={rebuildingPipeline}
-              className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-300 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 text-xs text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${rebuildingPipeline ? 'animate-spin text-indigo-400' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${rebuildingPipeline ? 'animate-spin text-indigo-600' : ''}`} />
               <span>Re-run Pipeline</span>
             </button>
             <span>•</span>
-            <span>Week of Sep 21–25, 2026</span>
+            <span>Historical Exercise: Sep 21–25, 2026</span>
           </div>
         </div>
       </footer>

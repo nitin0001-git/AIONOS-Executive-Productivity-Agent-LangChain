@@ -1,12 +1,15 @@
-# AIONOS Executive Productivity Agent
+# AIONOS Executive Productivity Agent (LangChain Edition)
 ### Tailored for Arjun Malhotra — VP Sales, Veridian Corp
 **Historical Simulation Period**: Monday, 21 September 2026 – Friday, 25 September 2026
+
+> **This version uses LangChain for Gemini orchestration.**
 
 [![Node.js](https://img.shields.io/badge/Node.js-v24-green.svg)](https://nodejs.org)
 [![React](https://img.shields.io/badge/React-18.3-blue.svg)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-6.0-purple.svg)](https://vitejs.dev)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8.svg)](https://tailwindcss.com)
-[![Google GenAI](https://img.shields.io/badge/Google_GenAI-Gemini_3.8_Flash-4285f4.svg)](https://ai.google.dev)
+[![LangChain](https://img.shields.io/badge/LangChain-Google_GenAI-10b981.svg)](https://js.langchain.com)
+[![Google Gemini](https://img.shields.io/badge/Gemini_3.8_Flash-4285f4.svg)](https://ai.google.dev)
 [![Tests](https://img.shields.io/badge/Tests-46%20Passed-emerald.svg)](docs/TESTING.md)
 
 ---
@@ -17,12 +20,17 @@ Senior executives receive massive streams of unstructured information every week
 1. **Nondeterministic Hallucinations**: Fabricating deadlines or guessing ownership when ambiguity exists.
 2. **Clock Dependency & Lack of Context**: Confusing current system time with the historical timeline of corporate events.
 
-The **AIONOS Executive Productivity Agent** transforms raw, chaotic business inputs into an actionable daily executive brief for **Arjun Malhotra (VP Sales)**. It implements a **hybrid architecture** combining **Google Gemini 3.8 Flash** via the modern `@google/genai` SDK for semantic extraction and conversational Q&A with **strict deterministic business logic** for entity normalization, cross-channel deduplication, deadline calculation, and ownership integrity.
+The **AIONOS Executive Productivity Agent** transforms raw, chaotic business inputs into an actionable daily executive brief for **Arjun Malhotra (VP Sales)**. It implements a **hybrid architecture** combining **Google Gemini 3.8 Flash** via **LangChain (`@langchain/google` and `@langchain/core`)** for semantic action extraction and conversational Q&A with **strict deterministic business logic** for entity normalization, cross-channel deduplication, deadline calculation, and ownership integrity.
+
+For a detailed technical comparison of what changed between the direct SDK version and this LangChain version, see [docs/LANGCHAIN_IMPLEMENTATION.md](docs/LANGCHAIN_IMPLEMENTATION.md).
 
 ---
 
 ## 2. Key Features
 
+- **LangChain AI Orchestration**:
+  - Uses the official `@langchain/google` integration (`ChatGoogle`) and `@langchain/core` runnables (`ChatPromptTemplate`, `JsonOutputParser`).
+  - No direct `@google/genai` calls in the final AI layer; LangGraph is not used.
 - **Historical Simulation Engine ("Viewing as of")**:
   - Eliminates host system clock dependencies.
   - Simulates the historical week of **Sep 21–25, 2026** across 10 selectable timepoints (e.g., *Monday 9:00 AM*, *Wednesday 9:00 AM [Default]*, *Wednesday EOD*, *Thursday 9:00 AM*, *Friday EOD*).
@@ -34,8 +42,10 @@ The **AIONOS Executive Productivity Agent** transforms raw, chaotic business inp
 - **Cross-Channel Action Deduplication**:
   - Consolidates real-world tasks scattered across Leadership Syncs, 5-turn email threads, and personal voice memos into single canonical actions with updated deadlines.
 - **Grounded Executive Q&A**:
-  - Conversational Q&A powered by Gemini 3.8 Flash with a deterministic fallback engine.
+  - Conversational Q&A powered by LangChain and Gemini 3.8 Flash with a deterministic fallback engine.
   - Refuses to hallucinate facts outside the Data Pack: returns *"I could not determine that from the available source data."*
+- **Light SaaS Business Dashboard**:
+  - Modern, clean SaaS dashboard aesthetics: light background, crisp white cards, subtle borders, and clear typography.
 
 ---
 
@@ -43,14 +53,16 @@ The **AIONOS Executive Productivity Agent** transforms raw, chaotic business inp
 
 - **Frontend**:
   - React 18, TypeScript, Vite 6
-  - Tailwind CSS (Clean Executive Dark Theme & Glassmorphism)
+  - Tailwind CSS (Clean Light SaaS Business Dashboard Theme)
   - Lucide React Icons
 - **Backend**:
   - Node.js (v24), Express.js (ES Modules)
   - CORS, Dotenv
-- **AI Integration**:
-  - Google Gemini 3.8 Flash (`gemini-2.5-flash` / `gemini-3.8-flash`)
-  - Modern Google GenAI SDK: `@google/genai`
+- **AI Orchestration (LangChain)**:
+  - `@langchain/google` (Official `ChatGoogle` chat model)
+  - `@langchain/core` (`ChatPromptTemplate`, `JsonOutputParser`, `StringOutputParser`)
+  - Configured model: Google Gemini 3.8 Flash (`gemini-3.8-flash`)
+  - Server-side API key management (`GEMINI_API_KEY`)
 - **Data Layer**:
   - Local structured JSON (`backend/data/raw/dataPack.json` and `backend/data/actions.json`)
   - Zero external database or microservice dependencies required.

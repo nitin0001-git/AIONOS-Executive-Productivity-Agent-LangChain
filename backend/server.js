@@ -73,7 +73,7 @@ app.listen(PORT, () => {
   console.log(` AIONOS Executive Productivity Agent Backend`);
   console.log(` Built for: Arjun Malhotra (VP Sales)`);
   console.log(` Server running on: http://localhost:${PORT}`);
-  console.log(` Gemini API Configured: ${isGeminiConfigured()} (${getModelName()})`);
+  console.log(` LangChain Gemini Orchestrator: ${isGeminiConfigured()} (${getModelName()})`);
   console.log(`====================================================`);
 });
 

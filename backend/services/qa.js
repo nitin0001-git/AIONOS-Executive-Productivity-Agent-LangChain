@@ -3,7 +3,9 @@
  * Answers executive inquiries for Arjun Malhotra based strictly on structured Data Pack evidence.
  */
 
-import { isGeminiConfigured, generateJson } from './llm.js';
+import { isGeminiConfigured, getChatModel } from './llm.js';
+import { ChatPromptTemplate } from '@langchain/core/prompts';
+import { JsonOutputParser } from '@langchain/core/output_parsers';
 import { generateBrief } from './brief.js';
 import { resolveActionStateAsOf, DEFAULT_AS_OF } from './status.js';
 import { loadActions } from './brief.js';
@@ -195,9 +197,14 @@ export async function askQuestion(question, asOf = DEFAULT_AS_OF) {
   const trimmedQuestion = question.trim();
   const brief = generateBrief(asOf);
 
-  // If Gemini is configured, invoke Gemini with the actions & evidence context
+  // If LangChain Gemini is configured, invoke model through LangChain Runnable chain
   if (isGeminiConfigured()) {
     try {
+      const model = getChatModel();
+      if (!model) {
+        return getDeterministicGroundedAnswer(trimmedQuestion, brief, asOf);
+      }
+
       const actionsContext = brief.allActions.map(a => ({
         id: a.id,
         title: a.title,
@@ -210,9 +217,9 @@ export async function askQuestion(question, asOf = DEFAULT_AS_OF) {
         knownEvidence: a.knownEvidence
       }));
 
-      const systemInstruction = `You are an executive assistant for Arjun Malhotra (VP Sales at Veridian Corp).
+      const systemPrompt = `You are an executive assistant for Arjun Malhotra (VP Sales at Veridian Corp).
 You are assisting Arjun during the historical week of Monday 21 Sep 2026 to Friday 25 Sep 2026.
-You are evaluating the inquiry strictly as of: ${asOf}.
+You are evaluating the inquiry strictly as of: {asOf}.
 
 CRITICAL GROUNDING RULES:
 1. Answer ONLY from the supplied structured action context and evidence.
@@ -221,23 +228,23 @@ CRITICAL GROUNDING RULES:
 4. For the Mumbai office lease renewal: Ownership is STRICTLY UNCLEAR / UNASSIGNED. Do NOT claim Facilities or anyone else owns it.
 5. Provide a concise, executive-level response formatted as JSON.`;
 
-      const prompt = `EXECUTIVE QUESTION: "${trimmedQuestion}"
+      const humanPrompt = `EXECUTIVE QUESTION: "{question}"
 
-SIMULATED TIME: ${asOf}
+SIMULATED TIME: {asOf}
 
-CURRENT ACTIONS CONTEXT AS OF ${asOf}:
-${JSON.stringify(actionsContext, null, 2)}
+CURRENT ACTIONS CONTEXT AS OF {asOf}:
+{actionsContext}
 
 Respond with a JSON object matching this schema:
-{
+{{
   "summary": "Concise direct answer (2-4 sentences)",
-  "keyPoints": ["bullet point 1", "bullet point 2", ...],
+  "keyPoints": ["bullet point 1", "bullet point 2"],
   "status": "open|completed|waiting|unclear|overdue|scheduled|unknown",
   "deadline": "Deadline label or null",
   "owner": "Owner name, Unclear, or null",
   "waitingOn": "Person name or null",
   "citations": [
-    {
+    {{
       "sourceType": "email|meeting|voice_note|calendar",
       "sourceId": "...",
       "timestamp": "...",
@@ -245,11 +252,24 @@ Respond with a JSON object matching this schema:
       "to": "...",
       "evidence": "exact quote or reference",
       "note": "..."
-    }
+    }}
   ]
-}`;
+}}`;
 
-      const llmResult = await generateJson(prompt, systemInstruction);
+      const promptTemplate = ChatPromptTemplate.fromMessages([
+        ['system', systemPrompt],
+        ['human', humanPrompt]
+      ]);
+
+      const parser = new JsonOutputParser();
+      const chain = promptTemplate.pipe(model).pipe(parser);
+
+      const llmResult = await chain.invoke({
+        asOf,
+        question: trimmedQuestion,
+        actionsContext: JSON.stringify(actionsContext, null, 2)
+      });
+
       if (llmResult && llmResult.summary) {
         return {
           question: trimmedQuestion,
@@ -258,7 +278,7 @@ Respond with a JSON object matching this schema:
         };
       }
     } catch (err) {
-      console.warn('[QA Service] Gemini invocation failed, using deterministic grounded answer:', err.message);
+      console.warn('[QA Service] LangChain invocation encountered an issue, using deterministic grounded answer:', err.message);
     }
   }
 

@@ -1,27 +1,36 @@
-# AIONOS Executive Productivity Agent — AI Usage & Integration Guide
+# AIONOS Executive Productivity Agent — AI Usage & Integration Guide (LangChain Edition)
 
-This document details the role of Artificial Intelligence in the Executive Productivity Agent, specifically Google Gemini 3.8 Flash, the modern `@google/genai` SDK, grounding mechanisms, prompt architectures, and the intentional division of labor between generative AI and deterministic logic.
+This document details the role of Artificial Intelligence in the Executive Productivity Agent, specifically Google Gemini 3.8 Flash, LangChain (`@langchain/google` and `@langchain/core`), grounding mechanisms, prompt templates, runnable chains, and the intentional division of labor between generative AI and deterministic logic.
 
 ---
 
-## 1. Model & SDK Selection
+## 1. Model & LangChain Orchestration Selection
 
-- **Model**: Google Gemini 3.8 Flash (`gemini-2.5-flash` / `gemini-3.8-flash`)
-- **SDK**: Modern `@google/genai` SDK (Official Google Gen AI SDK)
-- **Prohibited Libraries**: LangChain, `@google/generative-ai` (legacy), vector DB wrappers, and redundant orchestrators were excluded to keep the application lightweight, fast, and transparent.
+- **Model**: Google Gemini 3.8 Flash (`gemini-3.8-flash`)
+- **Orchestration**: Official LangChain Google integration (`@langchain/google` and `@langchain/core`)
+- **Model Class**: `ChatGoogle`
+- **Chain Architecture**: Composable LangChain Runnables using `ChatPromptTemplate` and `JsonOutputParser` / `StringOutputParser`
+- **Scope**: AI is used strictly for semantic extraction and grounded Q&A. All business rules, deduplication, deadline resolution, and ownership remain deterministic JavaScript application code.
 
-### SDK Initialization Example:
+### LangChain Model Initialization Example:
 ```javascript
-import { GoogleGenAI } from '@google/genai';
+import { ChatGoogle } from '@langchain/google';
+import { ChatPromptTemplate } from '@langchain/core/prompts';
+import { JsonOutputParser } from '@langchain/core/output_parsers';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-const response = await ai.models.generateContent({
-  model: 'gemini-2.5-flash',
-  contents: prompt,
-  config: {
-    systemInstruction: '...'
-  }
+const model = new ChatGoogle({
+  apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY,
+  model: process.env.GEMINI_MODEL || 'gemini-3.8-flash',
+  temperature: 0.1
 });
+
+const prompt = ChatPromptTemplate.fromMessages([
+  ['system', systemInstruction],
+  ['human', humanInput]
+]);
+
+const chain = prompt.pipe(model).pipe(new JsonOutputParser());
+const response = await chain.invoke(variables);
 ```
 
 ---

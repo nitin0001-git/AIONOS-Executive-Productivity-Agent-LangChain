@@ -18,22 +18,22 @@ interface DailyBriefProps {
 
 export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence }) => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* 1. OVERDUE SECTION (Shown prominently at top if overdue items exist) */}
       {brief.overdue.length > 0 && (
-        <section id="section-overdue" className="p-5 rounded-2xl bg-rose-950/20 border border-rose-500/30 shadow-xl animate-in fade-in duration-300">
+        <section id="section-overdue" className="p-5 rounded-xl bg-rose-50/60 border border-rose-200 shadow-xs">
           <div className="flex items-center gap-2.5 mb-4">
-            <div className="p-2 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
-              <AlertOctagon className="w-5 h-5 animate-pulse" />
+            <div className="p-2 rounded-lg bg-rose-100 text-rose-700 border border-rose-200">
+              <AlertOctagon className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white tracking-tight">1. Overdue Actions</h2>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                <h2 className="text-base font-bold text-rose-950 tracking-tight">1. Overdue Actions</h2>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300">
                   {brief.overdue.length} Action(s) Past Deadline
                 </span>
               </div>
-              <p className="text-xs text-rose-300/80">Commitments whose deadline has elapsed relative to the simulated time</p>
+              <p className="text-xs text-rose-700/90">Commitments whose deadline has elapsed relative to the simulated time</p>
             </div>
           </div>
 
@@ -46,26 +46,26 @@ export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence })
       )}
 
       {/* 2. TODAY'S ACTIONS */}
-      <section id="section-todays-actions" className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+      <section id="section-todays-actions" className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white tracking-tight">Today's Actions</h2>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">Today's Actions</h2>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">
                   {brief.todaysActions.length} Pending Today
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Items requiring Arjun's immediate execution, review, or participation today</p>
+              <p className="text-xs text-slate-500">Items requiring Arjun's immediate execution, review, or participation today</p>
             </div>
           </div>
         </div>
 
         {brief.todaysActions.length === 0 ? (
-          <div className="text-center py-8 text-xs text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
+          <div className="text-center py-6 text-xs text-slate-500 bg-slate-50 rounded-lg border border-slate-100">
             No pending action items scheduled for today.
           </div>
         ) : (
@@ -78,26 +78,26 @@ export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence })
       </section>
 
       {/* 3. MY COMMITMENTS */}
-      <section id="section-my-commitments" className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+      <section id="section-my-commitments" className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-violet-500/10 text-violet-400 border border-violet-500/20">
+            <div className="p-2 rounded-lg bg-violet-50 text-violet-600 border border-violet-100">
               <ListTodo className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white tracking-tight">My Commitments</h2>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">My Commitments</h2>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-violet-50 text-violet-700 border border-violet-200">
                   {brief.myCommitments.length} Active
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Promises and deliverables made by Arjun to colleagues and clients</p>
+              <p className="text-xs text-slate-500">Promises and deliverables made by Arjun to colleagues and clients</p>
             </div>
           </div>
         </div>
 
         {brief.myCommitments.length === 0 ? (
-          <div className="text-center py-8 text-xs text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
+          <div className="text-center py-6 text-xs text-slate-500 bg-slate-50 rounded-lg border border-slate-100">
             No active personal commitments outstanding.
           </div>
         ) : (
@@ -110,26 +110,26 @@ export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence })
       </section>
 
       {/* 4. WAITING ON OTHERS */}
-      <section id="section-waiting-on-others" className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+      <section id="section-waiting-on-others" className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            <div className="p-2 rounded-lg bg-sky-50 text-sky-600 border border-sky-100">
               <Hourglass className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white tracking-tight">Waiting on Others</h2>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">Waiting on Others</h2>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 border border-sky-200">
                   {brief.waitingOnOthers.length} Pending
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Actions where someone else needs to respond, finalize, or deliver</p>
+              <p className="text-xs text-slate-500">Actions where someone else needs to respond, finalize, or deliver</p>
             </div>
           </div>
         </div>
 
         {brief.waitingOnOthers.length === 0 ? (
-          <div className="text-center py-8 text-xs text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
+          <div className="text-center py-6 text-xs text-slate-500 bg-slate-50 rounded-lg border border-slate-100">
             You are not currently blocked on any deliverables.
           </div>
         ) : (
@@ -142,20 +142,20 @@ export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence })
       </section>
 
       {/* 5. UNCLEAR OWNERSHIP */}
-      <section id="section-unclear-ownership" className="p-5 rounded-2xl bg-slate-900/80 border border-amber-500/20 shadow-xl">
+      <section id="section-unclear-ownership" className="p-5 rounded-xl bg-white border border-amber-200 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+            <div className="p-2 rounded-lg bg-amber-50 text-amber-600 border border-amber-100">
               <HelpCircle className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white tracking-tight">Unclear Ownership</h2>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">Unclear Ownership</h2>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200">
                   {brief.unclearOwnership.length} Unresolved
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Critical tasks where ownership is unassigned or disputed (strictly preserved as Unclear)</p>
+              <p className="text-xs text-slate-500">Critical tasks where ownership is unassigned or disputed (strictly preserved as Unclear)</p>
             </div>
           </div>
         </div>
@@ -168,20 +168,20 @@ export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence })
       </section>
 
       {/* 6. UPCOMING DEADLINES */}
-      <section id="section-upcoming-deadlines" className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+      <section id="section-upcoming-deadlines" className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            <div className="p-2 rounded-lg bg-blue-50 text-blue-600 border border-blue-100">
               <Clock className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white tracking-tight">Upcoming Deadlines</h2>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">Upcoming Deadlines</h2>
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
                   {brief.upcomingDeadlines.length} Upcoming
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Future commitments due later in the historical simulation week</p>
+              <p className="text-xs text-slate-500">Future commitments due later in the historical simulation week</p>
             </div>
           </div>
         </div>
@@ -198,3 +198,5 @@ export const DailyBrief: React.FC<DailyBriefProps> = ({ brief, onViewEvidence })
     </div>
   );
 };
+
+export default DailyBrief;
