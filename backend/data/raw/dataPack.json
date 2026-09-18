@@ -1,0 +1,683 @@
+{
+  "metadata": {
+    "title": "Data Pack — Assignment 1: Executive Productivity Agent",
+    "targetUser": {
+      "name": "Arjun Malhotra",
+      "role": "VP Sales",
+      "email": "arjun.malhotra@veridian-corp.example"
+    },
+    "simulationPeriod": {
+      "startDate": "2026-09-21",
+      "endDate": "2026-09-25",
+      "description": "Monday, 21 September 2026 – Friday, 25 September 2026"
+    }
+  },
+  "people": [
+    {
+      "name": "Arjun Malhotra",
+      "role": "VP Sales (the agent's user)",
+      "email": "arjun.malhotra@veridian-corp.example",
+      "isUser": true
+    },
+    {
+      "name": "Neha Kapoor",
+      "role": "Marketing Lead",
+      "email": "neha.kapoor@veridian-corp.example",
+      "isUser": false
+    },
+    {
+      "name": "Raghav Sethi",
+      "role": "Ops Manager",
+      "email": "raghav.sethi@veridian-corp.example",
+      "isUser": false
+    },
+    {
+      "name": "Divya Rao",
+      "role": "Finance",
+      "email": "divya.rao@veridian-corp.example",
+      "isUser": false
+    },
+    {
+      "name": "Priya Nair",
+      "role": "Meridian Logistics (external client)",
+      "email": "priya.nair@meridianlogistics.example",
+      "isUser": false
+    },
+    {
+      "name": "Facilities",
+      "role": "Internal distribution list",
+      "email": "facilities@veridian-corp.example",
+      "isUser": false
+    }
+  ],
+  "meetings": [
+    {
+      "id": "meeting-leadership-sync",
+      "title": "Leadership Sync",
+      "date": "2026-09-21",
+      "startTime": "2026-09-21T09:00:00",
+      "endTime": "2026-09-21T09:35:00",
+      "attendees": [
+        "Arjun Malhotra",
+        "Neha Kapoor",
+        "Raghav Sethi",
+        "Divya Rao"
+      ],
+      "transcript": [
+        {
+          "speaker": "Arjun Malhotra",
+          "text": "Let’s keep this quick. Neha, where are we on the Q3 campaign deck?"
+        },
+        {
+          "speaker": "Neha Kapoor",
+          "text": "Draft is 80% done. I’ll send it to Arjun for review by Wednesday."
+        },
+        {
+          "speaker": "Arjun Malhotra",
+          "text": "Good. Also, remind me — I told Raghav I’d send him the updated vendor list. I’ll get that to him by end of day tomorrow."
+        },
+        {
+          "speaker": "Raghav Sethi",
+          "text": "Appreciated. Separately, the Mumbai office renewal paperwork needs someone to sign off this week. Not sure whose desk that’s on right now."
+        },
+        {
+          "speaker": "Divya Rao",
+          "text": "I think that’s supposed to be Facilities, but I haven’t seen anyone pick it up."
+        },
+        {
+          "speaker": "Arjun Malhotra",
+          "text": "Okay, flag it, don’t assume. Divya, can you also pull the July expense variance report before Thursday’s board prep?"
+        },
+        {
+          "speaker": "Divya Rao",
+          "text": "Yes, I’ll have it ready Wednesday evening."
+        },
+        {
+          "speaker": "Arjun Malhotra",
+          "text": "One more thing — client call with Meridian Logistics got pushed. I need to reconfirm the new time with their team myself."
+        },
+        {
+          "speaker": "Neha Kapoor",
+          "text": "Also, just a reminder, the campaign deck review — I said Wednesday, but realistically Thursday morning is safer."
+        },
+        {
+          "speaker": "Arjun Malhotra",
+          "text": "Noted. Let’s close here."
+        }
+      ]
+    }
+  ],
+  "calendars": {
+    "Arjun Malhotra": [
+      {
+        "id": "cal-arjun-1",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T09:00:00",
+        "endTime": "2026-09-21T09:35:00",
+        "event": "Leadership Sync"
+      },
+      {
+        "id": "cal-arjun-2",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T14:00:00",
+        "endTime": "2026-09-21T14:30:00",
+        "event": "1:1 with Neha"
+      },
+      {
+        "id": "cal-arjun-3",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T16:00:00",
+        "endTime": "2026-09-21T17:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-arjun-4",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T11:00:00",
+        "endTime": "2026-09-22T12:00:00",
+        "event": "Internal Budget Review"
+      },
+      {
+        "id": "cal-arjun-5",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T15:00:00",
+        "endTime": "2026-09-22T15:30:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-arjun-6",
+        "date": "2026-09-23",
+        "startTime": "2026-09-23T15:00:00",
+        "endTime": "2026-09-23T15:30:00",
+        "event": "Call — Meridian Logistics"
+      },
+      {
+        "id": "cal-arjun-7",
+        "date": "2026-09-23",
+        "startTime": "2026-09-23T18:00:00",
+        "endTime": "2026-09-23T18:15:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-arjun-8",
+        "date": "2026-09-24",
+        "startTime": "2026-09-24T09:00:00",
+        "endTime": "2026-09-24T10:00:00",
+        "event": "Board Prep Session"
+      },
+      {
+        "id": "cal-arjun-9",
+        "date": "2026-09-24",
+        "startTime": "2026-09-24T16:00:00",
+        "endTime": "2026-09-24T17:00:00",
+        "event": "Hiring Panel — Sales Associate"
+      },
+      {
+        "id": "cal-arjun-10",
+        "date": "2026-09-25",
+        "startTime": "2026-09-25T10:00:00",
+        "endTime": "2026-09-25T10:30:00",
+        "event": "Facilities Check-in"
+      },
+      {
+        "id": "cal-arjun-11",
+        "date": "2026-09-25",
+        "startTime": "2026-09-25T13:00:00",
+        "endTime": "2026-09-25T14:00:00",
+        "event": "Blocked"
+      }
+    ],
+    "Neha Kapoor": [
+      {
+        "id": "cal-neha-1",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T10:00:00",
+        "endTime": "2026-09-21T11:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-neha-2",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T14:00:00",
+        "endTime": "2026-09-21T14:30:00",
+        "event": "1:1 with Arjun"
+      },
+      {
+        "id": "cal-neha-3",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T13:00:00",
+        "endTime": "2026-09-22T14:00:00",
+        "event": "Campaign Vendor Call"
+      },
+      {
+        "id": "cal-neha-4",
+        "date": "2026-09-23",
+        "startTime": "2026-09-23T10:00:00",
+        "endTime": "2026-09-23T10:30:00",
+        "event": "Deck Prep"
+      },
+      {
+        "id": "cal-neha-5",
+        "date": "2026-09-23",
+        "startTime": "2026-09-23T13:00:00",
+        "endTime": "2026-09-23T15:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-neha-6",
+        "date": "2026-09-24",
+        "startTime": "2026-09-24T09:30:00",
+        "endTime": "2026-09-24T10:00:00",
+        "event": "Deck Review with Arjun"
+      },
+      {
+        "id": "cal-neha-7",
+        "date": "2026-09-25",
+        "startTime": "2026-09-25T11:00:00",
+        "endTime": "2026-09-25T12:00:00",
+        "event": "Blocked"
+      }
+    ],
+    "Raghav Sethi": [
+      {
+        "id": "cal-raghav-1",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T09:00:00",
+        "endTime": "2026-09-21T09:35:00",
+        "event": "Leadership Sync"
+      },
+      {
+        "id": "cal-raghav-2",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T13:00:00",
+        "endTime": "2026-09-21T14:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-raghav-3",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T11:00:00",
+        "endTime": "2026-09-22T12:00:00",
+        "event": "Internal Budget Review"
+      },
+      {
+        "id": "cal-raghav-4",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T15:30:00",
+        "endTime": "2026-09-22T16:00:00",
+        "event": "Ops Standup"
+      },
+      {
+        "id": "cal-raghav-5",
+        "date": "2026-09-23",
+        "startTime": "2026-09-23T09:00:00",
+        "endTime": "2026-09-23T11:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-raghav-6",
+        "date": "2026-09-24",
+        "startTime": "2026-09-24T14:00:00",
+        "endTime": "2026-09-24T15:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-raghav-7",
+        "date": "2026-09-25",
+        "startTime": "2026-09-25T10:00:00",
+        "endTime": "2026-09-25T10:30:00",
+        "event": "Facilities Check-in"
+      },
+      {
+        "id": "cal-raghav-8",
+        "date": "2026-09-25",
+        "startTime": "2026-09-25T15:00:00",
+        "endTime": "2026-09-25T16:00:00",
+        "event": "Blocked"
+      }
+    ],
+    "Divya Rao": [
+      {
+        "id": "cal-divya-1",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T14:30:00",
+        "endTime": "2026-09-21T15:00:00",
+        "event": "Budget Prep"
+      },
+      {
+        "id": "cal-divya-2",
+        "date": "2026-09-21",
+        "startTime": "2026-09-21T16:00:00",
+        "endTime": "2026-09-21T17:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-divya-3",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T09:00:00",
+        "endTime": "2026-09-22T09:15:00",
+        "event": "Quick Call with Arjun"
+      },
+      {
+        "id": "cal-divya-4",
+        "date": "2026-09-22",
+        "startTime": "2026-09-22T11:00:00",
+        "endTime": "2026-09-22T12:00:00",
+        "event": "Internal Budget Review"
+      },
+      {
+        "id": "cal-divya-5",
+        "date": "2026-09-23",
+        "startTime": "2026-09-23T13:00:00",
+        "endTime": "2026-09-23T14:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-divya-6",
+        "date": "2026-09-24",
+        "startTime": "2026-09-24T09:00:00",
+        "endTime": "2026-09-24T10:00:00",
+        "event": "Board Prep Session"
+      },
+      {
+        "id": "cal-divya-7",
+        "date": "2026-09-24",
+        "startTime": "2026-09-24T14:00:00",
+        "endTime": "2026-09-24T15:00:00",
+        "event": "Blocked"
+      },
+      {
+        "id": "cal-divya-8",
+        "date": "2026-09-25",
+        "startTime": "2026-09-25T10:00:00",
+        "endTime": "2026-09-25T11:00:00",
+        "event": "Blocked"
+      }
+    ]
+  },
+  "emailThreads": [
+    {
+      "threadId": "thread-1",
+      "subject": "Vendor List",
+      "emails": [
+        {
+          "id": "t1-e1",
+          "date": "2026-09-21",
+          "timestamp": "2026-09-21T09:50:00",
+          "displayTime": "Mon 21 Sep, 9:50 AM",
+          "from": "raghav.sethi@veridian-corp.example",
+          "fromName": "Raghav Sethi",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Following up from the sync — can you send the updated vendor list today?"
+        },
+        {
+          "id": "t1-e2",
+          "date": "2026-09-21",
+          "timestamp": "2026-09-21T17:40:00",
+          "displayTime": "Mon 21 Sep, 5:40 PM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "raghav.sethi@veridian-corp.example",
+          "toName": "Raghav Sethi",
+          "body": "Running behind, will send first thing tomorrow morning instead."
+        },
+        {
+          "id": "t1-e3",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T09:15:00",
+          "displayTime": "Tue 22 Sep, 9:15 AM",
+          "from": "raghav.sethi@veridian-corp.example",
+          "fromName": "Raghav Sethi",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "No worries, whenever you get a chance today works."
+        },
+        {
+          "id": "t1-e4",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T18:30:00",
+          "displayTime": "Tue 22 Sep, 6:30 PM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "raghav.sethi@veridian-corp.example",
+          "toName": "Raghav Sethi",
+          "body": "Sorry, got pulled into board prep — will send by tomorrow (Wednesday) morning for sure."
+        },
+        {
+          "id": "t1-e5",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T08:45:00",
+          "displayTime": "Wed 23 Sep, 8:45 AM",
+          "from": "raghav.sethi@veridian-corp.example",
+          "fromName": "Raghav Sethi",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Just checking — still good for this morning?"
+        }
+      ]
+    },
+    {
+      "threadId": "thread-2",
+      "subject": "Q3 Campaign Deck",
+      "emails": [
+        {
+          "id": "t2-e1",
+          "date": "2026-09-21",
+          "timestamp": "2026-09-21T11:00:00",
+          "displayTime": "Mon 21 Sep, 11:00 AM",
+          "from": "neha.kapoor@veridian-corp.example",
+          "fromName": "Neha Kapoor",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Deck’s coming together, still targeting Wednesday for your review."
+        },
+        {
+          "id": "t2-e2",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T16:15:00",
+          "displayTime": "Tue 22 Sep, 4:15 PM",
+          "from": "neha.kapoor@veridian-corp.example",
+          "fromName": "Neha Kapoor",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Heads up — shifting the review to Thursday morning instead of Wednesday, need one more day on the data slides."
+        },
+        {
+          "id": "t2-e3",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T10:00:00",
+          "displayTime": "Wed 23 Sep, 10:00 AM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "neha.kapoor@veridian-corp.example",
+          "toName": "Neha Kapoor",
+          "body": "Understood, Thursday morning works. What time exactly?"
+        },
+        {
+          "id": "t2-e4",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T10:20:00",
+          "displayTime": "Wed 23 Sep, 10:20 AM",
+          "from": "neha.kapoor@veridian-corp.example",
+          "fromName": "Neha Kapoor",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Let’s say 9:30 AM Thursday, before your board prep block."
+        },
+        {
+          "id": "t2-e5",
+          "date": "2026-09-24",
+          "timestamp": "2026-09-24T08:00:00",
+          "displayTime": "Thu 24 Sep, 8:00 AM",
+          "from": "neha.kapoor@veridian-corp.example",
+          "fromName": "Neha Kapoor",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Deck is ready, attaching the draft ahead of our 9:30 review."
+        }
+      ]
+    },
+    {
+      "threadId": "thread-3",
+      "subject": "Call Reschedule",
+      "emails": [
+        {
+          "id": "t3-e1",
+          "date": "2026-09-21",
+          "timestamp": "2026-09-21T13:00:00",
+          "displayTime": "Mon 21 Sep, 1:00 PM",
+          "from": "priya.nair@meridianlogistics.example",
+          "fromName": "Priya Nair",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Our scheduled call this week got bumped from our side — can you propose a new time? We’re flexible Tuesday–Thursday afternoons."
+        },
+        {
+          "id": "t3-e2",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T15:00:00",
+          "displayTime": "Tue 22 Sep, 3:00 PM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "priya.nair@meridianlogistics.example",
+          "toName": "Priya Nair",
+          "body": "Apologies for the delay — how about Wednesday 3:00 PM?"
+        },
+        {
+          "id": "t3-e3",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T17:45:00",
+          "displayTime": "Tue 22 Sep, 5:45 PM",
+          "from": "priya.nair@meridianlogistics.example",
+          "fromName": "Priya Nair",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Wednesday 3 PM works on our end, confirmed."
+        },
+        {
+          "id": "t3-e4",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T13:30:00",
+          "displayTime": "Wed 23 Sep, 1:30 PM",
+          "from": "priya.nair@meridianlogistics.example",
+          "fromName": "Priya Nair",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Quick check — still on for 3 PM today?"
+        },
+        {
+          "id": "t3-e5",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T14:00:00",
+          "displayTime": "Wed 23 Sep, 2:00 PM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "priya.nair@meridianlogistics.example",
+          "toName": "Priya Nair",
+          "body": "Yes, confirmed, see you at 3."
+        }
+      ]
+    },
+    {
+      "threadId": "thread-4",
+      "subject": "Expense Variance Report",
+      "emails": [
+        {
+          "id": "t4-e1",
+          "date": "2026-09-21",
+          "timestamp": "2026-09-21T14:30:00",
+          "displayTime": "Mon 21 Sep, 2:30 PM",
+          "from": "divya.rao@veridian-corp.example",
+          "fromName": "Divya Rao",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Starting on the July variance numbers, targeting Thursday morning for board prep as discussed."
+        },
+        {
+          "id": "t4-e2",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T09:00:00",
+          "displayTime": "Tue 22 Sep, 9:00 AM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "divya.rao@veridian-corp.example",
+          "toName": "Divya Rao",
+          "body": "Actually, can I get it by Wednesday evening instead? Want time to review before Thursday."
+        },
+        {
+          "id": "t4-e3",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T09:40:00",
+          "displayTime": "Tue 22 Sep, 9:40 AM",
+          "from": "divya.rao@veridian-corp.example",
+          "fromName": "Divya Rao",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Wednesday evening is tight but doable, I’ll prioritize it."
+        },
+        {
+          "id": "t4-e4",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T18:00:00",
+          "displayTime": "Wed 23 Sep, 6:00 PM",
+          "from": "divya.rao@veridian-corp.example",
+          "fromName": "Divya Rao",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "Report attached, sent as promised."
+        },
+        {
+          "id": "t4-e5",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T18:10:00",
+          "displayTime": "Wed 23 Sep, 6:10 PM",
+          "from": "arjun.malhotra@veridian-corp.example",
+          "fromName": "Arjun Malhotra",
+          "to": "divya.rao@veridian-corp.example",
+          "toName": "Divya Rao",
+          "body": "Got it, thank you — exactly what I needed before tomorrow."
+        }
+      ]
+    },
+    {
+      "threadId": "thread-5",
+      "subject": "Mumbai Office Lease Renewal",
+      "emails": [
+        {
+          "id": "t5-e1",
+          "date": "2026-09-21",
+          "timestamp": "2026-09-21T10:15:00",
+          "displayTime": "Mon 21 Sep, 10:15 AM",
+          "from": "facilities@veridian-corp.example",
+          "fromName": "Facilities",
+          "to": "allstaff@veridian-corp.example",
+          "toName": "All Staff",
+          "body": "Reminder: the Mumbai office lease renewal requires an authorized signature by Friday, 25 September."
+        },
+        {
+          "id": "t5-e2",
+          "date": "2026-09-22",
+          "timestamp": "2026-09-22T11:00:00",
+          "displayTime": "Tue 22 Sep, 11:00 AM",
+          "from": "raghav.sethi@veridian-corp.example",
+          "fromName": "Raghav Sethi",
+          "to": "arjun.malhotra@veridian-corp.example, divya.rao@veridian-corp.example",
+          "toName": "Arjun Malhotra, Divya Rao",
+          "body": "Following up from the sync — has anyone confirmed who’s signing off on the Mumbai renewal? Don’t think it’s been assigned."
+        },
+        {
+          "id": "t5-e3",
+          "date": "2026-09-23",
+          "timestamp": "2026-09-23T09:30:00",
+          "displayTime": "Wed 23 Sep, 9:30 AM",
+          "from": "divya.rao@veridian-corp.example",
+          "fromName": "Divya Rao",
+          "to": "raghav.sethi@veridian-corp.example, arjun.malhotra@veridian-corp.example",
+          "toName": "Raghav Sethi, Arjun Malhotra",
+          "body": "Not on my end — I believe this typically sits with Facilities directly, not us."
+        },
+        {
+          "id": "t5-e4",
+          "date": "2026-09-24",
+          "timestamp": "2026-09-24T16:00:00",
+          "displayTime": "Thu 24 Sep, 4:00 PM",
+          "from": "facilities@veridian-corp.example",
+          "fromName": "Facilities",
+          "to": "allstaff@veridian-corp.example",
+          "toName": "All Staff",
+          "body": "Second reminder: signature is still pending. Deadline is Friday, 25 September, end of day."
+        },
+        {
+          "id": "t5-e5",
+          "date": "2026-09-24",
+          "timestamp": "2026-09-24T16:45:00",
+          "displayTime": "Thu 24 Sep, 4:45 PM",
+          "from": "raghav.sethi@veridian-corp.example",
+          "fromName": "Raghav Sethi",
+          "to": "arjun.malhotra@veridian-corp.example",
+          "toName": "Arjun Malhotra",
+          "body": "This is now one day out and still unowned — can you confirm who’s handling it?"
+        }
+      ]
+    }
+  ],
+  "voiceNotes": [
+    {
+      "id": "vn-1",
+      "date": "2026-09-21",
+      "timestamp": "2026-09-21T18:40:00",
+      "displayTime": "Monday 21 Sep, 6:40 PM (recorded in cab)",
+      "speaker": "Arjun Malhotra",
+      "memoText": "Quick note to self — need to get Raghav that vendor list, I think I said today but it might slip to tomorrow morning, remind me. Also still haven’t heard back on the Mumbai lease thing, someone needs to own that, I don’t think it’s me."
+    },
+    {
+      "id": "vn-2",
+      "date": "2026-09-23",
+      "timestamp": "2026-09-23T08:15:00",
+      "displayTime": "Wednesday 23 Sep, 8:15 AM",
+      "speaker": "Arjun Malhotra",
+      "memoText": "Reminder — expense variance report from Divya needs to be in my hands by Wednesday evening, not Thursday, I want time to go through it before board prep. Also Meridian call — I owe Priya a time, need to lock that in today."
+    }
+  ]
+}

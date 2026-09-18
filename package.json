@@ -1,0 +1,17 @@
+{
+  "name": "aionos-executive-productivity-agent",
+  "version": "1.0.0",
+  "description": "AIONOS Executive Productivity Agent for Arjun Malhotra (VP Sales)",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm --prefix backend start",
+    "client": "npm --prefix frontend dev",
+    "build": "npm --prefix frontend build",
+    "test": "npm --prefix backend test",
+    "pipeline": "npm --prefix backend run pipeline",
+    "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
