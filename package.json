@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "npm --prefix backend start",
-    "client": "npm --prefix frontend dev",
-    "build": "npm --prefix frontend build",
+    "client": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
     "test": "npm --prefix backend test",
     "pipeline": "npm --prefix backend run pipeline",
     "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install"
